@@ -1,9 +1,10 @@
 [package]
 name = "unsafe_math_macro"
-version = "0.1.0"
-edition = "2024"
+version = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
 description = "unsafe_math macro"
-repository = "https://github.com/platonvin/unsafe_math"
 
 [lib]
 proc-macro = true

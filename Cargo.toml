@@ -1,5 +1,11 @@
 [workspace]
 members = ["unsafe_math", "unsafe_math_macro", "unsafe_math_trait"]
 
+[workspace.package]
+version = "0.1.0"
+license = "MIT"
+repository = "https://github.com/platonvin/unsafe_math"
+edition = "2024"
+
 [profile.bench]
 overflow-checks = false

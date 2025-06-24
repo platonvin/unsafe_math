@@ -1,7 +1,6 @@
 #![feature(test)]
 extern crate test;
 
-use std::hint::black_box;
 use unsafe_math::*;
 
 // this "benchmark" is fake and exists purely to compare assembly

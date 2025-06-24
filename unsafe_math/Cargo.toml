@@ -1,10 +1,11 @@
 [package]
 name = "unsafe_math"
-version = "0.1.0"
-edition = "2024"
+version = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
 keywords = ["performance", "unsafe", "math", "macro"]
 description = "proc_macro to replace math operation with their unchecked/f_fast versions"
-repository = "https://github.com/platonvin/unsafe_math"
 
 [dependencies]
 unsafe_math_macro = { version = "0.1.0", path = "../unsafe_math_macro" }
