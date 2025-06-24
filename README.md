@@ -1,6 +1,7 @@
 # Unsafe Math
 
-`unsafe_math` is a proc_macro that brings integer overflow UB and -ffast-math to Rust (it also removes all implicit zero-division checks as side effect). Under the hood it replaces most operations with their "unchecked" of "ffun_fast" intrinsic versions.
+`unsafe_math` is a proc_macro that brings integer overflow UB and -ffast-math to Rust (it also removes all implicit zero-division checks as side effect). Under the hood it replaces most operations with their "unchecked" of "ffun_fast" intrinsic versions.\
+Requires nightly
 
 ## Usage
 Simply add `#[unsafe_math]` attribute to the scope you want it to apply to

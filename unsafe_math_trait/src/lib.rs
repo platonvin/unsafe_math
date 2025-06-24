@@ -41,8 +41,8 @@ macro_rules! impl_fast_math_for_float {
                     #[inline(always)] fn fast_mul(self, rhs: Self) -> Self { unsafe { core::intrinsics::fmul_fast(self, rhs) } }
                     #[inline(always)] fn fast_div(self, rhs: Self) -> Self { unsafe { core::intrinsics::fdiv_fast(self, rhs) } }
                     #[inline(always)] fn fast_rem(self, rhs: Self) -> Self { unsafe { core::intrinsics::frem_fast(self, rhs) } }
-                    #[inline(always)] fn fast_shl(self, _rhs: u32) -> Self { self }
-                    #[inline(always)] fn fast_shr(self, _rhs: u32) -> Self { self }
+                    #[inline(always)] fn fast_shl(self, _rhs: u32) -> Self { unsafe { std::hint::unreachable_unchecked() } }
+                    #[inline(always)] fn fast_shr(self, _rhs: u32) -> Self { unsafe { std::hint::unreachable_unchecked() } }
                 }
             )*
         };
