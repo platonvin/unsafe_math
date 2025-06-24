@@ -1,0 +1,15 @@
+[package]
+name = "unsafe_math_macro"
+version = "0.1.0"
+edition = "2024"
+description = "unsafe_math macro"
+repository = "https://github.com/platonvin/unsafe_math"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2", features = ["visit-mut", "full"] }
+quote = "1"
+proc-macro2 = "1"
+unsafe_math_trait = { version = "0.1", path = "../unsafe_math_trait" }

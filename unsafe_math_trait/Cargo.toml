@@ -1,0 +1,6 @@
+[package]
+name = "unsafe_math_trait"
+version = "0.1.0"
+edition = "2024"
+description = "unsafe_math trait"
+repository = "https://github.com/platonvin/unsafe_math"
