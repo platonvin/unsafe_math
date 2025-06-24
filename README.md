@@ -10,10 +10,30 @@ Requires nightly
 Simply add `#[unsafe_math]` attribute to the scope you want it to apply to
 
 ```rust
-use unsafe_math::*;
+use unsafe_math::unsafe_math;
 
 #[unsafe_math]
 fn function(...) -> ... {
+    ...
+}
+#[unsafe_math]
+impl Trait for Type {
+    ...
+}
+// you need these to invoke proc_macro on {...} statements
+#![feature(stmt_expr_attributes)]
+#![feature(proc_macro_hygiene)]
+#[unsafe_math]
+{
+    ...
+}
+```
+
+You can also do this:
+```rust
+use unsafe_math::unsafe_math_block;
+
+unsafe_math_block! {
     ...
 }
 ```
@@ -22,8 +42,8 @@ fn function(...) -> ... {
 
 ## Examples
 
-This section demonstrates `unsafe_math` effect on produced assembly for few examples.\
-`somefun_slow` corresponds to slow version, `somefun_fast` corresponds to version with `#[unsafe math]`:
+This section demonstrates `#[unsafe_math]` effect on produced assembly for few examples.\
+`somefun_slow` corresponds to slow version, `somefun_fast` corresponds to version with `#[unsafe_math]`:
 
 #### Example 1
 ```rust

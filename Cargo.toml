@@ -1,11 +1,10 @@
 [workspace]
 members = ["unsafe_math", "unsafe_math_macro", "unsafe_math_trait"]
+resolver = "3"
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 repository = "https://github.com/platonvin/unsafe_math"
 edition = "2024"
-
-[profile.bench]
-overflow-checks = false
+readme = "README.md"

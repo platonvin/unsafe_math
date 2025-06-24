@@ -4,21 +4,16 @@ version = { workspace = true }
 repository = { workspace = true }
 edition = { workspace = true }
 license = { workspace = true }
+readme = { workspace = true }
 keywords = ["performance", "unsafe", "math", "macro"]
 description = "proc_macro to replace math operation with their unchecked/f_fast versions"
 
 [dependencies]
-unsafe_math_macro = { version = "0.1.0", path = "../unsafe_math_macro" }
-unsafe_math_trait = { version = "0.1.0", path = "../unsafe_math_trait" }
-
-[dev-dependencies]
-criterion = "0.6.0"
+unsafe_math_macro = { version = "0.1.1", path = "../unsafe_math_macro" }
+unsafe_math_trait = { version = "0.1.1", path = "../unsafe_math_trait" }
 
 [[bench]]
 name = "bench"
-harness = false
 
 [[bench]]
 name = "nothing"
-# no criterion cause we dont do precise measurements
-# harness = false

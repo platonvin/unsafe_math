@@ -1,9 +1,11 @@
-use criterion::{BenchmarkId, Criterion, criterion_group};
-use std::hint::black_box;
-use unsafe_math::*;
+#![feature(stmt_expr_attributes)]
+#![feature(proc_macro_hygiene)]
+#![feature(test)]
+extern crate test;
+
+use unsafe_math::unsafe_math;
 
 // no_mangle is for cargo asm
-const VECTOR_SIZE: usize = 16_384;
 
 #[unsafe(no_mangle)]
 fn sliding_sum_baseline(data: &[u32], window: usize) -> u64 {
@@ -31,10 +33,11 @@ fn sliding_sum_wrapping(data: &[u32], window: usize) -> u64 {
     out
 }
 
-#[unsafe_math]
 #[unsafe(no_mangle)]
 fn sliding_sum_fast(data: &[u32], window: usize) -> u64 {
     let mut out = 0;
+    // you can use unsafe_math on for loops, too. But you need stmt_expr_attributes and proc_macro_hygiene features
+    #[unsafe_math]
     for i in 0..data.len() - window {
         let mut sum = 0;
         for j in 0..window {
@@ -84,73 +87,89 @@ pub fn bilinear_sample_fast(a00: f64, a10: f64, a01: f64, a11: f64, fx: f64, fy:
     result
 }
 
-fn int_workloads(c: &mut Criterion) {
-    let mut group = c.benchmark_group("integer workloads");
+#[cfg(test)]
+mod tests {
+    use std::hint::black_box;
 
-    let data: Vec<u32> = (0..VECTOR_SIZE as u32)
-        .map(|x| black_box(x.wrapping_mul(7).wrapping_add(3)))
-        .collect();
-    let window = black_box(128);
+    use super::*;
+    use test::Bencher;
 
-    group.bench_function(BenchmarkId::new("sliding_sum", "baseline"), |b| {
+    const VECTOR_SIZE: usize = 1 << 14;
+
+    #[bench]
+    fn bench_sliding_sum_baseline(b: &mut Bencher) {
+        let data: Vec<u32> = (0..VECTOR_SIZE as u32)
+            .map(|x| black_box(x.wrapping_mul(7).wrapping_add(3)))
+            .collect();
+        let window = 128;
+
+        (0..1000)
+            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
+            .for_each(drop);
+
         b.iter(|| black_box(sliding_sum_baseline(&data, window)))
-    });
-    group.bench_function(BenchmarkId::new("sliding_sum", "wrapping"), |b| {
+    }
+
+    #[bench]
+    fn bench_sliding_sum_wrapping(b: &mut Bencher) {
+        let data: Vec<u32> = (0..VECTOR_SIZE as u32)
+            .map(|x| black_box(x.wrapping_mul(7).wrapping_add(3)))
+            .collect();
+        let window = 128;
+
+        (0..1000)
+            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
+            .for_each(drop);
+
         b.iter(|| black_box(sliding_sum_wrapping(&data, window)))
-    });
-    group.bench_function(BenchmarkId::new("sliding_sum", "fast"), |b| {
+    }
+
+    #[bench]
+    fn bench_sliding_sum_fast(b: &mut Bencher) {
+        let data: Vec<u32> = (0..VECTOR_SIZE as u32)
+            .map(|x| black_box(x.wrapping_mul(7).wrapping_add(3)))
+            .collect();
+        let window = 128;
+
+        (0..1000)
+            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
+            .for_each(drop);
+
         b.iter(|| black_box(sliding_sum_fast(&data, window)))
-    });
+    }
 
-    group.finish();
-}
+    const A00: f64 = black_box(0.1f64);
+    const A10: f64 = black_box(0.9f64);
+    const A01: f64 = black_box(0.2f64);
+    const A11: f64 = black_box(0.8f64);
+    const FX: f64 = black_box(0.33f64);
+    const FY: f64 = black_box(0.66f64);
 
-pub fn float_workloads(c: &mut Criterion) {
-    let mut group = c.benchmark_group("float workloads");
-
-    // 2D inputs
-    let a00 = black_box(0.1f64);
-    let a10 = black_box(0.9f64);
-    let a01 = black_box(0.2f64);
-    let a11 = black_box(0.8f64);
-    let fx = black_box(0.33f64);
-    let fy = black_box(0.66f64);
-
-    group.bench_function(BenchmarkId::new("bilinear_sample", "baseline"), |b| {
+    #[bench]
+    fn bench_bilinear_sample_baseline(b: &mut Bencher) {
         b.iter(|| {
             black_box(bilinear_sample_baseline(
-                black_box(a00),
-                black_box(a10),
-                black_box(a01),
-                black_box(a11),
-                black_box(fx),
-                black_box(fy),
+                black_box(A00),
+                black_box(A10),
+                black_box(A01),
+                black_box(A11),
+                black_box(FX),
+                black_box(FY),
             ))
         })
-    });
-    group.bench_function(BenchmarkId::new("bilinear_sample", "fast"), |b| {
+    }
+
+    #[bench]
+    fn bench_bilinear_sample_fast(b: &mut Bencher) {
         b.iter(|| {
             black_box(bilinear_sample_fast(
-                black_box(a00),
-                black_box(a10),
-                black_box(a01),
-                black_box(a11),
-                black_box(fx),
-                black_box(fy),
+                black_box(A00),
+                black_box(A10),
+                black_box(A01),
+                black_box(A11),
+                black_box(FX),
+                black_box(FY),
             ))
         })
-    });
-
-    group.finish();
-}
-
-criterion_group!(benches, int_workloads, float_workloads);
-fn main() {
-    benches();
-    criterion::Criterion::default()
-        .sample_size(200)
-        .warm_up_time(std::time::Duration::from_secs(3))
-        .measurement_time(std::time::Duration::from_secs(5))
-        .configure_from_args()
-        .final_summary();
+    }
 }
