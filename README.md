@@ -1,6 +1,9 @@
+[![CI](https://github.com/platonvin/unsafe_math/actions/workflows/ci.yml/badge.svg)](https://github.com/platonvin/unsafe_math/actions/workflows/ci.yml)
+
 # Unsafe Math
 
-`unsafe_math` is a proc_macro that brings integer overflow UB and -ffast-math to Rust (it also removes all implicit zero-division checks as side effect). Under the hood it replaces most operations with their "unchecked" of "ffun_fast" intrinsic versions.\
+`unsafe_math` is a proc_macro that replaces math with unchecked / fast-math versions.\
+On practice, this makes math match assembly of GCC/Clang with "-Ofast" \
 Requires nightly
 
 ## Usage
@@ -180,7 +183,6 @@ sum_smart:
 ```
 
 #### Example 3
-this one only makes use of `-ffast-math`
 
 ```rust
 pub fn bilinear_sample(a00: f64, a10: f64, a01: f64, a11: f64, fx: f64, fy: f64) -> f64 {
