@@ -17,11 +17,8 @@ pub use unsafe_math_trait::UnsafeMath;
 // this only tests validity, not if unsafe_math actually does anything
 #[cfg(test)]
 mod tests {
+    use super::*;
     use std::ops::{Add, Div, Mul, Rem, Sub};
-
-    use unsafe_math_macro::unsafe_math_block;
-
-    use crate::unsafe_math;
 
     #[test]
     fn test_integer_fast_add() {

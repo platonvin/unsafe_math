@@ -13,4 +13,4 @@ proc-macro = true
 syn = { version = "2", features = ["visit-mut", "full"] }
 quote = "1"
 proc-macro2 = "1"
-unsafe_math_trait = { version = "0.1.1", path = "../unsafe_math_trait" }
+unsafe_math_trait = { workspace = true, path = "../unsafe_math_trait" }

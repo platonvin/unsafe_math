@@ -8,3 +8,7 @@ license = "MIT"
 repository = "https://github.com/platonvin/unsafe_math"
 edition = "2024"
 readme = "README.md"
+
+[workspace.dependencies]
+unsafe_math_trait = { version = "0.1.1", path = "unsafe_math_trait" }
+unsafe_math_macro = { version = "0.1.1", path = "unsafe_math_macro" }

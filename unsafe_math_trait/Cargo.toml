@@ -5,3 +5,6 @@ repository = { workspace = true }
 edition = { workspace = true }
 license = { workspace = true }
 description = "unsafe_math trait"
+
+[dependencies]
+qvek = { path = "../../qvek/qvek", default-features = false }
