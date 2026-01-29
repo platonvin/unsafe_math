@@ -9,8 +9,8 @@ keywords = ["performance", "unsafe", "math", "macro"]
 description = "proc_macro to replace math operation with their unchecked/f_fast versions"
 
 [dependencies]
-unsafe_math_macro = { workspace = true, path = "../unsafe_math_macro" }
-unsafe_math_trait = { workspace = true, path = "../unsafe_math_trait" }
+unsafe_math_macro = { path = "../unsafe_math_macro" }
+unsafe_math_trait = { path = "../unsafe_math_trait" }
 
 [[bench]]
 name = "bench"
