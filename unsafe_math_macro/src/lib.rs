@@ -32,7 +32,7 @@ impl VisitMut for UnsafeMathVisitor {
         }) = expr
             && let Some(method) = binary_op_to_method_name(op)
         {
-            let rewritten = quote! { ::unsafe_math_trait::UnsafeMath::#method(#left, #right) };
+            let rewritten = quote! { ::unsafe_math::UnsafeMath::#method(#left, #right) };
 
             *expr = match op {
                 // for compound assigns, we assign the result back to the left expression
