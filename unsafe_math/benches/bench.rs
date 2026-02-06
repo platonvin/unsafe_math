@@ -3,6 +3,7 @@
 #![feature(test)]
 extern crate test;
 
+use unsafe_math::UnsafeMath;
 use unsafe_math::unsafe_math;
 
 // no_mangle is for cargo asm
