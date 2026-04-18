@@ -7,10 +7,10 @@ use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::{
-    BinOp, Expr, Stmt, Token,
     parse::{Parse, ParseStream},
     parse_macro_input,
     visit_mut::{self, VisitMut},
+    BinOp, Expr, Stmt, Token,
 };
 
 struct UnsafeMathVisitor;

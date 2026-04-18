@@ -3,8 +3,8 @@
 #![feature(test)]
 extern crate test;
 
-use unsafe_math::UnsafeMath;
 use unsafe_math::unsafe_math;
+use unsafe_math::UnsafeMath;
 
 // no_mangle is for cargo asm
 
@@ -104,9 +104,7 @@ mod tests {
             .collect();
         let window = 128;
 
-        (0..1000)
-            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
-            .for_each(drop);
+        (0..1000).map(|_| black_box(sliding_sum_wrapping(&data, window))).for_each(drop);
 
         b.iter(|| black_box(sliding_sum_baseline(&data, window)))
     }
@@ -118,9 +116,7 @@ mod tests {
             .collect();
         let window = 128;
 
-        (0..1000)
-            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
-            .for_each(drop);
+        (0..1000).map(|_| black_box(sliding_sum_wrapping(&data, window))).for_each(drop);
 
         b.iter(|| black_box(sliding_sum_wrapping(&data, window)))
     }
@@ -132,9 +128,7 @@ mod tests {
             .collect();
         let window = 128;
 
-        (0..1000)
-            .map(|_| black_box(sliding_sum_wrapping(&data, window)))
-            .for_each(drop);
+        (0..1000).map(|_| black_box(sliding_sum_wrapping(&data, window))).for_each(drop);
 
         b.iter(|| black_box(sliding_sum_fast(&data, window)))
     }

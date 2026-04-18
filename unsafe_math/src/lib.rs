@@ -226,10 +226,7 @@ mod tests {
         let b_ov = 20;
         let c_ov = 2;
         let d_ov = 3;
-        let expected_ov = a_ov
-            .wrapping_add(b_ov)
-            .wrapping_mul(c_ov)
-            .wrapping_div(d_ov);
+        let expected_ov = a_ov.wrapping_add(b_ov).wrapping_mul(c_ov).wrapping_div(d_ov);
         assert_eq!(chained_ops_int(a_ov, b_ov, c_ov, d_ov), expected_ov);
     }
 
@@ -315,9 +312,7 @@ mod tests {
         let b_neg = -3_i32;
         let c_neg = 5_i32;
         let d_neg = -2_i32;
-        let expected_neg = a_neg
-            .wrapping_add(b_neg.wrapping_mul(c_neg))
-            .wrapping_sub(d_neg);
+        let expected_neg = a_neg.wrapping_add(b_neg.wrapping_mul(c_neg)).wrapping_sub(d_neg);
         assert_eq!(
             mixed_nested_and_precedence(a_neg, b_neg, c_neg, d_neg),
             expected_neg

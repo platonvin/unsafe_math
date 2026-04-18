@@ -56,26 +56,17 @@ mod tests {
     const ITERS: u32 = 24;
     #[bench]
     fn bench_sum_slow(b: &mut test::Bencher) {
-        b.iter(|| {
-            (0..ITERS)
-                .map(|i| black_box(slow_sum(black_box(i))))
-                .for_each(drop)
-        });
+        b.iter(|| (0..ITERS).map(|i| black_box(slow_sum(black_box(i)))).for_each(drop));
     }
     #[bench]
     fn bench_sum_fast(b: &mut test::Bencher) {
-        b.iter(|| {
-            (0..ITERS)
-                .map(|i| black_box(fast_sum(black_box(i))))
-                .for_each(drop)
-        });
+        b.iter(|| (0..ITERS).map(|i| black_box(fast_sum(black_box(i)))).for_each(drop));
     }
     #[bench]
     fn bench_sum_smart(b: &mut test::Bencher) {
         b.iter(|| {
-            (0..ITERS)
-                .map(|i| black_box(smart_sum(black_box(i))))
-                .for_each(drop) // of wisdom
+            (0..ITERS).map(|i| black_box(smart_sum(black_box(i)))).for_each(drop)
+            // of wisdom
         });
     }
 
