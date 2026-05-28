@@ -147,9 +147,7 @@ mod tests {
     // parenthesis tests. Im scared of changing order of operations
 
     #[unsafe_math]
-    fn deeply_nested_add(a: u32, b: u32, c: u32) -> u32 {
-        ((a + b) + c)
-    }
+    fn deeply_nested_add(a: u32, b: u32, c: u32) -> u32 { ((a + b) + c) }
 
     #[test]
     fn test_deeply_nested_add() {
@@ -161,14 +159,10 @@ mod tests {
     }
 
     #[unsafe_math]
-    fn precedence_int_mul_add(a: u32, b: u32, c: u32) -> u32 {
-        a + (b * c)
-    }
+    fn precedence_int_mul_add(a: u32, b: u32, c: u32) -> u32 { a + (b * c) }
 
     #[unsafe_math]
-    fn precedence_int_add_mul(a: u32, b: u32, c: u32) -> u32 {
-        (a + b) * c
-    }
+    fn precedence_int_add_mul(a: u32, b: u32, c: u32) -> u32 { (a + b) * c }
 
     #[test]
     fn test_precedence_int() {
@@ -185,14 +179,10 @@ mod tests {
     }
 
     #[unsafe_math]
-    fn precedence_float_mul_add(a: f32, b: f32, c: f32) -> f32 {
-        a + (b * c)
-    }
+    fn precedence_float_mul_add(a: f32, b: f32, c: f32) -> f32 { a + (b * c) }
 
     #[unsafe_math]
-    fn precedence_float_add_mul(a: f32, b: f32, c: f32) -> f32 {
-        (a + b) * c
-    }
+    fn precedence_float_add_mul(a: f32, b: f32, c: f32) -> f32 { (a + b) * c }
 
     #[test]
     fn test_precedence_float() {
@@ -209,9 +199,7 @@ mod tests {
     }
 
     #[unsafe_math]
-    fn chained_ops_int(a: i32, b: i32, c: i32, d: i32) -> i32 {
-        ((a + b) * c) / d
-    }
+    fn chained_ops_int(a: i32, b: i32, c: i32, d: i32) -> i32 { ((a + b) * c) / d }
 
     #[test]
     fn test_chained_ops_int() {
@@ -231,9 +219,7 @@ mod tests {
     }
 
     #[unsafe_math]
-    fn chained_ops_float(a: f32, b: f32, c: f32, d: f32) -> f32 {
-        ((a + b) * c) / d
-    }
+    fn chained_ops_float(a: f32, b: f32, c: f32, d: f32) -> f32 { ((a + b) * c) / d }
 
     #[test]
     fn test_chained_ops_float() {
@@ -262,14 +248,10 @@ mod tests {
         assert_eq!(single_operand_parentheses(a, b), expected);
     }
 
-    fn mock_function() -> u32 {
-        42
-    }
+    fn mock_function() -> u32 { 42 }
 
     #[unsafe_math]
-    fn parentheses_around_function_call(x: u32) -> u32 {
-        (mock_function() * x) + 5
-    }
+    fn parentheses_around_function_call(x: u32) -> u32 { (mock_function() * x) + 5 }
 
     #[test]
     fn test_parentheses_around_function_call() {
@@ -278,14 +260,10 @@ mod tests {
         assert_eq!(parentheses_around_function_call(x), expected);
     }
 
-    fn mock_float_function() -> f32 {
-        3.14
-    }
+    fn mock_float_function() -> f32 { 3.14 }
 
     #[unsafe_math]
-    fn parentheses_around_float_function_call(x: f32) -> f32 {
-        (mock_float_function() / x) - 1.0
-    }
+    fn parentheses_around_float_function_call(x: f32) -> f32 { (mock_float_function() / x) - 1.0 }
 
     #[test]
     fn test_parentheses_around_float_function_call() {

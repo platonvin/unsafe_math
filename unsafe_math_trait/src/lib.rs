@@ -48,7 +48,9 @@ macro_rules! impl_fast_math_for_float {
         };
     }
 
-impl_fast_math_for_int!(i8, u8, i16, u16, i32, u32, i64, u64, i128, u128, isize, usize);
+impl_fast_math_for_int!(
+    i8, u8, i16, u16, i32, u32, i64, u64, i128, u128, isize, usize
+);
 impl_fast_math_for_float!(f32, f64);
 
 macro_rules! impl_fast_math_for_vek {

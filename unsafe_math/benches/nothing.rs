@@ -9,31 +9,21 @@ use unsafe_math::*;
 // maybe i should use test for this
 
 #[unsafe(no_mangle)]
-fn slow_convert(block: i32) -> i32 {
-    (block * 16) / 8
-}
+fn slow_convert(block: i32) -> i32 { (block * 16) / 8 }
 
 #[unsafe(no_mangle)]
 #[unsafe_math]
-fn fast_convert(block: i32) -> i32 {
-    (block * 16) / 8
-}
+fn fast_convert(block: i32) -> i32 { (block * 16) / 8 }
 
 #[unsafe(no_mangle)]
-fn slow_sum(a: u32) -> u32 {
-    (0..a).map(|i| 1 << i as u32).sum()
-}
+fn slow_sum(a: u32) -> u32 { (0..a).map(|i| 1 << i as u32).sum() }
 
 #[unsafe(no_mangle)]
 #[unsafe_math]
-fn fast_sum(a: u32) -> u32 {
-    (0..a).map(|i| 1 << i as u32).sum()
-}
+fn fast_sum(a: u32) -> u32 { (0..a).map(|i| 1 << i as u32).sum() }
 
 #[unsafe(no_mangle)]
-fn smart_sum(a: u32) -> u32 {
-    (2 << (a - 1)) - 1
-}
+fn smart_sum(a: u32) -> u32 { (2 << (a - 1)) - 1 }
 
 #[cfg(test)]
 mod tests {
@@ -123,9 +113,7 @@ mod tests {
 
     #[unsafe_math]
     impl UnsafeCalcTrait for UnsafeCalc {
-        fn calc(sum: &mut i32, i: u32) {
-            *sum += 1 << i;
-        }
+        fn calc(sum: &mut i32, i: u32) { *sum += 1 << i; }
     }
 
     // should be equivalent to fast
