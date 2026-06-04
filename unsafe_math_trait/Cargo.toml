@@ -7,4 +7,4 @@ license = { workspace = true }
 description = "unsafe_math trait"
 
 [dependencies]
-qvek = { path = "../../qvek/qvek", default-features = false }
+qvek = { git = "https://github.com/platonvin/qvek.git", default-features = false }
