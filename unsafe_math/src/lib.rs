@@ -1,5 +1,5 @@
-#![feature(stmt_expr_attributes)]
-#![feature(proc_macro_hygiene)]
+#![cfg_attr(test, feature(stmt_expr_attributes))]
+#![cfg_attr(test, feature(proc_macro_hygiene))]
 
 //! # unsafe_math main crate
 //!
